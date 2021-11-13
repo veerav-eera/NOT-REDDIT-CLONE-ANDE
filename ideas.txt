@@ -1,0 +1,7 @@
+financial application
+ - Help Tax calculation
+ 
+Student help application
+ - Standing function 
+ - drink water function
+ - Alarm timer
