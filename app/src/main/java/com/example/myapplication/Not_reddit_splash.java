@@ -30,7 +30,6 @@ public class Not_reddit_splash extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
             }
         };
         // To Start the thread
