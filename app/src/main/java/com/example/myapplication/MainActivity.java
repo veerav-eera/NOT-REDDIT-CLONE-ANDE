@@ -13,17 +13,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabasePosts db = new DatabasePosts(this);
 
-        DatabaseAccounts db = new DatabaseAccounts(this);
-        TextView list = findViewById(R.id.list);
-        List<Account> accountList = db.getAllAccounts();
+        List<Post> posts = db.getAllPosts();
         String log = "";
-        for (Account cn : accountList) {
-            log += "user_id: " + cn.getUser_id() + " , username: " + cn.getUsername() + " , Email: " +
-                    cn.getEmail() + "\n";
+        for (Post p : posts) {
+            log += "post_id: " + p.getPost_id() + "\npost_title: " + p.getPost_title() + "\npost_content: " + p.getPost_content() + "\npost_likes: " + p.getPost_likes() + "\npost_dislikes: " + p.getPost_dislikes() + "\npost_creator: " + p.getPost_creator() + "\n\n";
         }
 
-        list.setText(log);
+        TextView tv = (TextView) findViewById(R.id.textView3);
+        tv.setText(log);
     }
 
 }

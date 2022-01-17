@@ -1,28 +1,24 @@
 package com.example.myapplication;
 
-import com.example.myapplication.Account;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseAccounts extends SQLiteOpenHelper {
+public class DatabasePosts extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
-    private static final String DATABASE_TABLE = "accounts";
+    private static final String DATABASE_TABLE = "post";
 
-    public DatabaseAccounts(Context context) {
+    public DatabasePosts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
     }
 
-    // Creating Accounts Table
+    // Creating Posts Table
     @Override
     public void onCreate(SQLiteDatabase db) {
         String selectQuery = "SELECT  * FROM " + DATABASE_TABLE;
@@ -31,11 +27,13 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         // Create table ONLY when it does not exist
         if (!cursor.moveToFirst()) {
             String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + DATABASE_TABLE + " (" +
-                    "\"user_id\" INTEGER NOT NULL UNIQUE," +
-                    "\"username\" TEXT NOT NULL UNIQUE," +
-                    "\"password\" TEXT NOT NULL," +
-                    "\"email\" TEXT NOT NULL UNIQUE," +
-                    "PRIMARY KEY(\"user_id\" AUTOINCREMENT)" +
+                    "\"post_id\" INTEGER NOT NULL UNIQUE," +
+                    "\"post_title\" TEXT NOT NULL," +
+                    "\"post_content\" TEXT NOT NULL," +
+                    "\"post_likes\" INTEGER NOT NULL DEFAULT 0," +
+                    "\"post_dislikes\" INTEGER NOT NULL DEFAULT 0," +
+                    "\"post_creator\" INTEGER NOT NULL," +
+                    "PRIMARY KEY(\"post_id\" AUTOINCREMENT)" +
                     ");";
 
             db.execSQL(CREATE_ACCOUNTS_TABLE);
@@ -52,9 +50,9 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // code to get all accounts in a list view
-    public List<Account> getAllAccounts() {
-        List<Account> accountList = new ArrayList<Account>();
+    // code to get all posts in a list view
+    public List<Post> getAllPosts() {
+        List<Post> postList = new ArrayList<Post>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + DATABASE_TABLE;
 
@@ -64,19 +62,20 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Account account = new Account();
-                account.setUser_id(Integer.parseInt(cursor.getString(0)));
-                account.setUsername(cursor.getString(1));
-                account.setPassword(cursor.getString(2));
-                account.setEmail(cursor.getString(3));
+                Post post = new Post();
+                post.setPost_id(Integer.parseInt(cursor.getString(0)));
+                post.setPost_title(cursor.getString(1));
+                post.setPost_content(cursor.getString(2));
+                post.setPost_likes(cursor.getInt(3));
+                post.setPost_dislikes(cursor.getInt(4));
+                post.setPost_creator(cursor.getInt(5));
 
                 // Adding contact to list
-                accountList.add(account);
+                postList.add(post);
             } while (cursor.moveToNext());
         }
 
-        // return contact list
-        return accountList;
+        // return post list
+        return postList;
     }
 }
-

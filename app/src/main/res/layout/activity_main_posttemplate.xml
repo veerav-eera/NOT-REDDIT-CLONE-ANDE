@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#FDFDFD"
+    android:id="@+id/postTemplate"
+    android:layout_height="300dp"
+    android:layout_margin="15dp"
+    android:layout_width="375dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:baselineAligned="false"
+        android:id="@+id/textView2"
+        android:layout_height="wrap_content"
+        android:layout_margin="10px"
+        android:layout_width="match_parent"
+        android:text="@ryan"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="this is a post"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:text="hi this is a post, idk why this is capitalized when it should not have been lolol"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:text="@string/thumbs_up" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:text="@string/thumbs_down" />
+    </LinearLayout>
+
+    <View
+        android:background="#c0c0c0"
+        android:layout_height="2dp"
+        android:layout_width="match_parent" />
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:baselineAligned="false"
+            android:id="@+id/textView5"
+            android:layout_height="wrap_content"
+            android:layout_margin="10px"
+            android:layout_width="match_parent"
+            android:text="Comments"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:ems="10"
+                android:gravity="start|top"
+                android:id="@+id/editTextTextMultiLine3"
+                android:inputType="textMultiLine"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:text="&#9992; Post" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:baselineAligned="false"
+                android:id="@+id/textView7"
+                android:layout_height="wrap_content"
+                android:layout_margin="10px"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="@ryan"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="Wowowow whayta nice comment" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
