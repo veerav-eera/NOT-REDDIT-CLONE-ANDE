@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DatabasePosts db = new DatabasePosts(this);
 
-        List<Post> posts = db.getAllPosts();;
+        DatabasePosts db = new DatabasePosts(this);
+        List<Post> posts = db.getAllPosts();
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.postList);
         rv.setAdapter(new PostAdapter(posts));
