@@ -1,8 +1,11 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,14 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DatabasePosts db = new DatabasePosts(this);
 
-        List<Post> posts = db.getAllPosts();
-        String log = "";
-        for (Post p : posts) {
-            log += "post_id: " + p.getPost_id() + "\npost_title: " + p.getPost_title() + "\npost_content: " + p.getPost_content() + "\npost_likes: " + p.getPost_likes() + "\npost_dislikes: " + p.getPost_dislikes() + "\npost_creator: " + p.getPost_creator() + "\n\n";
-        }
+        List<Post> posts = db.getAllPosts();;
 
-        TextView tv = (TextView) findViewById(R.id.textView3);
-        tv.setText(log);
+        RecyclerView rv = (RecyclerView) findViewById(R.id.postList);
+        rv.setAdapter(new PostAdapter(posts));
+        rv.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

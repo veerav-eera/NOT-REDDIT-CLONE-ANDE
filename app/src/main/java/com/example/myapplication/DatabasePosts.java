@@ -21,23 +21,17 @@ public class DatabasePosts extends SQLiteOpenHelper {
     // Creating Posts Table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String selectQuery = "SELECT  * FROM " + DATABASE_TABLE;
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        String CREATE_ACCOUNTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
+                "\"post_id\" INTEGER NOT NULL UNIQUE," +
+                "\"post_title\" TEXT NOT NULL," +
+                "\"post_content\" TEXT NOT NULL," +
+                "\"post_likes\" INTEGER NOT NULL DEFAULT 0," +
+                "\"post_dislikes\" INTEGER NOT NULL DEFAULT 0," +
+                "\"post_creator\" INTEGER NOT NULL," +
+                "PRIMARY KEY(\"post_id\" AUTOINCREMENT)" +
+                ");";
 
-        // Create table ONLY when it does not exist
-        if (!cursor.moveToFirst()) {
-            String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + DATABASE_TABLE + " (" +
-                    "\"post_id\" INTEGER NOT NULL UNIQUE," +
-                    "\"post_title\" TEXT NOT NULL," +
-                    "\"post_content\" TEXT NOT NULL," +
-                    "\"post_likes\" INTEGER NOT NULL DEFAULT 0," +
-                    "\"post_dislikes\" INTEGER NOT NULL DEFAULT 0," +
-                    "\"post_creator\" INTEGER NOT NULL," +
-                    "PRIMARY KEY(\"post_id\" AUTOINCREMENT)" +
-                    ");";
-
-            db.execSQL(CREATE_ACCOUNTS_TABLE);
-        }
+        db.execSQL(CREATE_ACCOUNTS_TABLE);
     }
 
     // Upgrading database

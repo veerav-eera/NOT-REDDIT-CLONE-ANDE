@@ -67,4 +67,16 @@ public class Post {
     public void setPost_creator(int post_creator) {
         this.post_creator = post_creator;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "post_id=" + post_id +
+                ", post_title='" + post_title + '\'' +
+                ", post_content='" + post_content + '\'' +
+                ", post_likes=" + post_likes +
+                ", post_dislikes=" + post_dislikes +
+                ", post_creator=" + post_creator +
+                '}';
+    }
 }
