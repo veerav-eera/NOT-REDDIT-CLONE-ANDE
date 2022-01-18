@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="thumbs_up">&#128077;</string>
+    <string name="thumbs_down">&#128078;</string>
+</resources>
