@@ -48,7 +48,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
     public List<Post> getAllPosts() {
         List<Post> postList = new ArrayList<Post>();
         // Select All Query
-        String selectQuery = "SELECT * FROM " + DATABASE_TABLE;
+        String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator)";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -62,7 +62,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
                 post.setPost_content(cursor.getString(2));
                 post.setPost_likes(cursor.getInt(3));
                 post.setPost_dislikes(cursor.getInt(4));
-                post.setPost_creator(cursor.getInt(5));
+                post.setPost_creator(cursor.getString(6));
 
                 // Adding contact to list
                 postList.add(post);

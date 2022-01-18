@@ -12,55 +12,58 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private List<Post> localDataSet;
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
+    // This is the array of post objects
     public PostAdapter(List<Post> dataSet) {
-        localDataSet = dataSet;
+        this.localDataSet = dataSet;
     }
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
+    // This is to get the template unique ID fields to be replaced with later
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+        private final TextView username;
+        private final TextView postTitle;
+        private final TextView postContent;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.textView);
+            username = (TextView) view.findViewById(R.id.username);
+            postTitle = (TextView) view.findViewById(R.id.postTitle);
+            postContent = (TextView) view.findViewById(R.id.postContent);
         }
 
-        public TextView getTextView() {
-            return textView;
+        // The following functions returns the TextView objects
+        public TextView getUsername() {
+            return username;
+        }
+
+        public TextView getPostTitle() {
+            return postTitle;
+        }
+
+        public TextView getPostContent() {
+            return postContent;
         }
     }
 
-    // Create new views (invoked by the layout manager)
+    // This is to inflate the layout template file with the SQLite Database length passed in as argument
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.activity_main_posttemplate, viewGroup, false);
 
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    // This is to override any existing text in the TextView template to be replaced with the SQLite Database contents
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet.get(position).getPost_content());
+        viewHolder.getUsername().setText(localDataSet.get(position).getPost_creator());
+        viewHolder.getPostTitle().setText(localDataSet.get(position).getPost_title());
+        viewHolder.getPostContent().setText(localDataSet.get(position).getPost_content());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    // This just gets you the database length of post
     @Override
     public int getItemCount() {
         return localDataSet.size();
