@@ -78,5 +78,10 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         // return contact list
         return accountList;
     }
+
+    //code to create a account
+    public void Createaccounts(){
+
+    }
 }
 
