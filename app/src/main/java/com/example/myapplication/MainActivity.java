@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DatabasePosts db = new DatabasePosts(this);
 
-        List<Post> posts = db.getAllPosts();;
+        List<Post> posts = db.getAllPosts();
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.postList);
         rv.setAdapter(new PostAdapter(posts));
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.about:
                 // Do Something
-                Intent i = new Intent(this, login.class);
+                Intent i = new Intent(this, profile.class);
                 startActivity(i);
                 return true;
             case R.id.help:

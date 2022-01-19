@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,9 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "accounts";
-    private  String KEY_NAME ;
-    private String KEY_Emial;
+    private  String KEY_NAME = "username" ;
+    private String KEY_Emial = "email";
+    private String KEY_Password = "password";
 
     public DatabaseAccounts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,19 +83,6 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         return accountList;
     }
 
-    //code to create a account
-    public void Createuser(String username, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, username); // Contact Name
-        values.put(KEY_Emial, password); // Contact Phone
-
-        // Inserting Row
-        db.insert(DATABASE_TABLE, null, values);
-        //2nd argument is String containing nullColumnHack
-        db.close(); // Closing database connection
-    }
 
     public String checkLogin(String username, String password){
         Log.d("Username", "checkLogin: "+username);
@@ -111,10 +100,50 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         }
 
         if(user_id != ""){
-            logincheck ="login";
+            logincheck = user_id;
         }
         return logincheck;
 
+
+    }
+
+    public Account getaccount(String userid) {
+        Account loggedin = new Account();
+        Log.d("Username", "checkLogin: "+userid);
+        String selectQuery = "SELECT username,email FROM " + DATABASE_TABLE+" WHERE user_id ='"+userid+"'";
+        String logincheck = "failed";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //user_id
+        if (cursor.moveToFirst()) {
+            do {
+                Log.d("hello", "checkLogin: "+cursor.getString(0));
+                Log.d("Insert Data : ", "");
+                Log.d("Insert Data : ", "");
+                Log.d("Insert Data : ", "");
+                Log.d("Insert Data : ", "");
+                Log.d("Insert Data : ", "");
+                loggedin.setUsername( cursor.getString(0));
+                loggedin.setEmail(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        return loggedin;
+    }
+
+    public String createuser(String username, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, username);
+        values.put(KEY_Emial, email);
+        values.put(KEY_Password, password);
+
+        // Inserting Row
+        db.insert(DATABASE_TABLE, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+
+        return "done";
 
     }
 }
