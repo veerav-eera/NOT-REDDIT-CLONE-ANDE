@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.about:
                 // Do Something
-                Toast.makeText(getApplicationContext(),"About...", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, login.class);
+                startActivity(i);
                 return true;
             case R.id.help:
                 // Do Something

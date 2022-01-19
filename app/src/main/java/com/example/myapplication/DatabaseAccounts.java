@@ -16,6 +16,8 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "accounts";
+    private  String KEY_NAME ;
+    private String KEY_Emial;
 
     public DatabaseAccounts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -80,7 +82,39 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     }
 
     //code to create a account
-    public void Createaccounts(){
+    public void Createuser(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, username); // Contact Name
+        values.put(KEY_Emial, password); // Contact Phone
+
+        // Inserting Row
+        db.insert(DATABASE_TABLE, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+    }
+
+    public String checkLogin(String username, String password){
+        Log.d("Username", "checkLogin: "+username);
+        String selectQuery = "SELECT  user_id FROM " + DATABASE_TABLE+" WHERE username ='"+username+"'and password = '"+password+"'";
+        String logincheck = "failed";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        //user_id
+        String user_id = "";
+        if (cursor.moveToFirst()) {
+            do {
+                Log.d("hello", "checkLogin: "+cursor.getString(0));
+                user_id = cursor.getString(0);
+            } while (cursor.moveToNext());
+        }
+
+        if(user_id != ""){
+            logincheck ="login";
+        }
+        return logincheck;
+
 
     }
 }
