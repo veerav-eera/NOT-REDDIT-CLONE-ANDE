@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +32,12 @@ public class profile extends AppCompatActivity {
         TextView username = (TextView) findViewById(R.id.nametextview);
         username.setText(userinfo.getUsername());
 
+    }
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
