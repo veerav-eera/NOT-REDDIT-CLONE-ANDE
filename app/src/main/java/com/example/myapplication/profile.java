@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +31,27 @@ public class profile extends AppCompatActivity {
         username.setText(userinfo.getUsername());
 
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.about:
+                // Do Something
+                Intent i = new Intent(this, profile.class);
+                startActivity(i);
+                return true;
+            case R.id.help:
+                // Do Something
+                Toast.makeText(getApplicationContext(),"Help...", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.pref:
+                // Do Something
+                // Do Something
+                i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                return true;
+        }
+        return false;
 
+    }
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.logoutbtn:
