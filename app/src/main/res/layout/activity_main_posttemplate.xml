@@ -58,9 +58,9 @@
             android:layout_weight="1"
             android:text="Like"
             android:textColor="#198754"
-            app:iconTint="#198754"
             app:icon="@drawable/like_button_transparent"
-            app:iconSize="30dp" />
+            app:iconSize="30dp"
+            app:iconTint="#198754" />
 
         <Button
             android:id="@+id/dislikeButton"
@@ -71,9 +71,9 @@
             android:layout_weight="1"
             android:text="Dislike"
             android:textColor="#dc3545"
-            app:iconTint="#dc3545"
             app:icon="@drawable/dislike_button_transparent"
-            app:iconSize="30dp" />
+            app:iconSize="30dp"
+            app:iconTint="#dc3545" />
     </LinearLayout>
 
 </LinearLayout>

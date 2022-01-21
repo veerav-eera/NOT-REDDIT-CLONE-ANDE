@@ -26,7 +26,7 @@ public class Not_reddit_splash extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     // Launch the MainActivity class
-                    Intent intent = new Intent(Not_reddit_splash.this, login.class);
+                    Intent intent = new Intent(Not_reddit_splash.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
