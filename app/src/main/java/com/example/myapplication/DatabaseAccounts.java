@@ -34,7 +34,7 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
 
         // Create table ONLY when it does not exist
         if (!cursor.moveToFirst()) {
-            String CREATE_ACCOUNTS_TABLE = "CREATE TABLE " + DATABASE_TABLE + " (" +
+            String CREATE_ACCOUNTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
                     "\"user_id\" INTEGER NOT NULL UNIQUE," +
                     "\"username\" TEXT NOT NULL UNIQUE," +
                     "\"password\" TEXT NOT NULL," +
