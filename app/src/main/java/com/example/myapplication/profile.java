@@ -46,9 +46,10 @@ public class profile extends AppCompatActivity {
                 Intent i = new Intent(this, profile.class);
                 startActivity(i);
                 return true;
-            case R.id.help:
+            case R.id.create:
                 // Do Something
-                Toast.makeText(getApplicationContext(),"Help...", Toast.LENGTH_SHORT).show();
+                Intent j = new Intent(this, createpost.class);
+                startActivity(j);
                 return true;
             case R.id.pref:
                 // Do Something

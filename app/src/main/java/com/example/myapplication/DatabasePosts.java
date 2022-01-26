@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,11 @@ public class DatabasePosts extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "post";
+    private  String KEY_Title = "post_title" ;
+    private String KEY_Content = "post_content";
+    private String KEY_Likes = "post_likes";
+    private  String KEY_Dislikes = "post_dislikes" ;
+    private String KEY_Creator = "post_creator";
 
     public DatabasePosts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,7 +54,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
     public List<Post> getAllPosts() {
         List<Post> postList = new ArrayList<Post>();
         // Select All Query
-        String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator)";
+        String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator) ORDER BY post_id DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -71,5 +77,23 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
         // return post list
         return postList;
+    }
+    public String createpost(String post_title, String post_content, String post_creator) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Title, post_title);
+        values.put(KEY_Content, post_content);
+        values.put(KEY_Likes, 0);
+        values.put(KEY_Dislikes, 0);
+        values.put(KEY_Creator, post_creator);
+
+        // Inserting Row
+        db.insert(DATABASE_TABLE, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+
+        return "done";
+
     }
 }
