@@ -90,6 +90,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             DatabaseImpressions DBI = new DatabaseImpressions(context);
             DBI.modifyLikes(post_id, Integer.parseInt(user_id));
+            this.updateList();
 
             // Update button view
             viewHolder.getPostLikes().setText(localDataSet.get(position).getPost_likes() + "");
@@ -104,6 +105,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             DatabaseImpressions DBI = new DatabaseImpressions(context);
             DBI.modifyDislikes(post_id, Integer.parseInt(user_id));
+            this.updateList();
 
             // Update button view
             viewHolder.getPostLikes().setText(localDataSet.get(position).getPost_likes() + "");
@@ -112,6 +114,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Log.d("NEWLIKES", "onBindViewHolder: " + localDataSet.get(position).getPost_likes());
             Log.d("NEWDISLIKES", "onBindViewHolder: " + localDataSet.get(position).getPost_dislikes());
         });
+    }
+
+    public void updateList() {
+        DatabasePosts db = new DatabasePosts(context);
+        this.localDataSet = db.getAllPosts();
     }
 
     // This just gets you the database length of post

@@ -49,7 +49,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
     public void modifyLikes(int post_idINT, int user_idINT) {
         String post_id = Integer.toString(post_idINT);
         String user_id = Integer.toString(user_idINT);
-        Post posts = new Post();
 
         SQLiteDatabase db = this.getWritableDatabase();
         String SQLQuery = "SELECT * FROM " + DATABASE_TABLE + " WHERE post_id = ? AND user_id = ?";
@@ -65,15 +64,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
             SQLQuery = "UPDATE post SET post_likes = post_likes + 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
 
-            SQLQuery = "SELECT post_likes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_likes(cursor.getInt(0));
-                } while (cursor.moveToNext());
-            }
-
         } else if (cursor.getInt(3) == 0) {
             Log.d("DISLIKETOLIKE", "modifyLikes: DISLIKETOLIKE");
             // If user has disliked before and is now pressing like
@@ -82,16 +72,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
 
             SQLQuery = "UPDATE post SET post_dislikes = post_dislikes - 1, post_likes = post_likes + 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
-
-            SQLQuery = "SELECT post_likes, post_dislikes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_likes(cursor.getInt(0));
-                    posts.setPost_dislikes(cursor.getInt(1));
-                } while (cursor.moveToNext());
-            }
 
         } else {
             Log.d("LIKEREMOVE", "modifyLikes: LIKEREMOVE");
@@ -102,14 +82,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
             SQLQuery = "UPDATE post SET post_likes = post_likes - 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
 
-            SQLQuery = "SELECT post_likes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_likes(cursor.getInt(0));
-                } while (cursor.moveToNext());
-            }
         }
 
         cursor.close();
@@ -119,7 +91,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
     public void modifyDislikes(int post_idINT, int user_idINT) {
         String post_id = Integer.toString(post_idINT);
         String user_id = Integer.toString(user_idINT);
-        Post posts = new Post();
 
         SQLiteDatabase db = this.getWritableDatabase();
         String SQLQuery = "SELECT * FROM " + DATABASE_TABLE + " WHERE post_id = ? AND user_id = ?";
@@ -135,15 +106,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
             SQLQuery = "UPDATE post SET post_dislikes = post_dislikes + 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
 
-            SQLQuery = "SELECT post_dislikes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_dislikes(cursor.getInt(0));
-                } while (cursor.moveToNext());
-            }
-
         } else if (cursor.getInt(3) == 1) {
             Log.d("LIKETODISLIKE", "modifyLikes: LIKETODISLIKE");
             // If user has liked before and is now pressing dislike
@@ -152,16 +114,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
 
             SQLQuery = "UPDATE post SET post_likes = post_likes - 1, post_dislikes = post_dislikes + 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
-
-            SQLQuery = "SELECT post_likes, post_dislikes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_likes(cursor.getInt(0));
-                    posts.setPost_dislikes(cursor.getInt(1));
-                } while (cursor.moveToNext());
-            }
 
         } else {
             Log.d("DISLIKEREMOVE", "modifyLikes: DISLIKEREMOVE");
@@ -172,14 +124,6 @@ public class DatabaseImpressions extends SQLiteOpenHelper {
             SQLQuery = "UPDATE post SET post_dislikes = post_dislikes - 1 WHERE post_id = ?";
             db.execSQL(SQLQuery, new String[]{post_id});
 
-            SQLQuery = "SELECT post_dislikes FROM post WHERE post_id = ?";
-            cursor = db.rawQuery(SQLQuery, new String[]{post_id});
-
-            if (cursor.moveToFirst()) {
-                do {
-                    posts.setPost_dislikes(cursor.getInt(0));
-                } while (cursor.moveToNext());
-            }
         }
 
         cursor.close();
