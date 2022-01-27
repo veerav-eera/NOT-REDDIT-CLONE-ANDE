@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +23,32 @@ public class createpost extends AppCompatActivity {
         setContentView(R.layout.createpost);
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                // Do Something
+                Intent i = new Intent(this, profile.class);
+                startActivity(i);
+                return true;
+            case R.id.create:
+                // Do Something
+                Intent j = new Intent(this, createpost.class);
+                startActivity(j);
+                return true;
+            case R.id.pref:
+                Intent k = new Intent(this, MainActivity.class);
+                startActivity(k);
+                return true;
+        }
+        return false;
+    }
 
     public void onClick(View v) {
         switch (v.getId()) {

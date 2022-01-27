@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(j);
                 return true;
             case R.id.pref:
-                // Do Something
-                Toast.makeText(getApplicationContext(), "Preference...", Toast.LENGTH_SHORT).show();
+                Intent k = new Intent(this, MainActivity.class);
+                startActivity(k);
                 return true;
         }
         return false;
