@@ -58,7 +58,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
         List<Post> postList = new ArrayList<Post>();
         // Select All Query
-        String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator)";
+        String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator) ORDER BY post_id DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
