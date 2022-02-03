@@ -17,7 +17,7 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "accounts";
-    private  String KEY_NAME = "username" ;
+    private String KEY_NAME = "username";
     private String KEY_Emial = "email";
     private String KEY_Password = "password";
 
@@ -29,21 +29,16 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     // Creating Accounts Table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String selectQuery = "SELECT  * FROM " + DATABASE_TABLE;
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
         // Create table ONLY when it does not exist
-        if (!cursor.moveToFirst()) {
-            String CREATE_ACCOUNTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
-                    "\"user_id\" INTEGER NOT NULL UNIQUE," +
-                    "\"username\" TEXT NOT NULL UNIQUE," +
-                    "\"password\" TEXT NOT NULL," +
-                    "\"email\" TEXT NOT NULL UNIQUE," +
-                    "PRIMARY KEY(\"user_id\" AUTOINCREMENT)" +
-                    ");";
+        String CREATE_ACCOUNTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
+                "\"user_id\" INTEGER NOT NULL UNIQUE," +
+                "\"username\" TEXT NOT NULL UNIQUE," +
+                "\"password\" TEXT NOT NULL," +
+                "\"email\" TEXT NOT NULL UNIQUE," +
+                "PRIMARY KEY(\"user_id\" AUTOINCREMENT)" +
+                ");";
 
-            db.execSQL(CREATE_ACCOUNTS_TABLE);
-        }
+        db.execSQL(CREATE_ACCOUNTS_TABLE);
     }
 
     // Upgrading database
@@ -84,9 +79,9 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     }
 
 
-    public String checkLogin(String username, String password){
-        Log.d("Username", "checkLogin: "+username);
-        String selectQuery = "SELECT  user_id FROM " + DATABASE_TABLE+" WHERE username ='"+username+"'and password = '"+password+"'";
+    public String checkLogin(String username, String password) {
+        Log.d("Username", "checkLogin: " + username);
+        String selectQuery = "SELECT  user_id FROM " + DATABASE_TABLE + " WHERE username ='" + username + "'and password = '" + password + "'";
         String logincheck = "failed";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -94,12 +89,12 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
         String user_id = "";
         if (cursor.moveToFirst()) {
             do {
-                Log.d("hello", "checkLogin: "+cursor.getString(0));
+                Log.d("hello", "checkLogin: " + cursor.getString(0));
                 user_id = cursor.getString(0);
             } while (cursor.moveToNext());
         }
 
-        if(user_id != ""){
+        if (user_id != "") {
             logincheck = user_id;
         }
         return logincheck;
@@ -109,21 +104,21 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
 
     public Account getaccount(String userid) {
         Account loggedin = new Account();
-        Log.d("Username", "checkLogin: "+userid);
-        String selectQuery = "SELECT username,email FROM " + DATABASE_TABLE+" WHERE user_id ='"+userid+"'";
+        Log.d("Username", "checkLogin: " + userid);
+        String selectQuery = "SELECT username,email FROM " + DATABASE_TABLE + " WHERE user_id ='" + userid + "'";
         String logincheck = "failed";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         //user_id
         if (cursor.moveToFirst()) {
             do {
-                Log.d("hello", "checkLogin: "+cursor.getString(0));
+                Log.d("hello", "checkLogin: " + cursor.getString(0));
                 Log.d("Insert Data : ", "");
                 Log.d("Insert Data : ", "");
                 Log.d("Insert Data : ", "");
                 Log.d("Insert Data : ", "");
                 Log.d("Insert Data : ", "");
-                loggedin.setUsername( cursor.getString(0));
+                loggedin.setUsername(cursor.getString(0));
                 loggedin.setEmail(cursor.getString(1));
             } while (cursor.moveToNext());
         }

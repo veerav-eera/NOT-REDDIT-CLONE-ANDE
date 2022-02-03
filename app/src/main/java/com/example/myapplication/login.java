@@ -35,7 +35,7 @@ public class login extends AppCompatActivity {
                 if (x != "failed") {
                     SharedPreferences account = getSharedPreferences("Account_details", MODE_PRIVATE);
                     SharedPreferences.Editor editor = account.edit();
-                    Log.d("TAG", "onCreate: "+x);
+                    Log.d("TAG", "onCreate: " + x);
                     editor.putString("userid", x);
                     editor.commit();
                     Intent i1 = new Intent(this, MainActivity.class);

@@ -5,7 +5,7 @@
         android:title="@string/item1" />
 
     <item
-        android:id="@+id/create"
+        android:id="@+id/createPost"
         android:title="@string/item2" />
 
     <item

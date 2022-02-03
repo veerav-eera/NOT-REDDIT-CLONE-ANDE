@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(this, profile.class);
                 startActivity(i);
                 return true;
-            case R.id.create:
+            case R.id.createPost:
                 // Do Something
                 Intent j = new Intent(this, createpost.class);
                 startActivity(j);
