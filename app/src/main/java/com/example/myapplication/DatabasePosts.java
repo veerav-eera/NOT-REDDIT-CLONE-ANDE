@@ -1,17 +1,24 @@
 package com.example.myapplication;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabasePosts extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "post";
+    private  String KEY_Title = "post_title" ;
+    private String KEY_Content = "post_content";
+    private String KEY_Likes = "post_likes";
+    private  String KEY_Dislikes = "post_dislikes" ;
+    private String KEY_Creator = "post_creator";
 
     public DatabasePosts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,6 +28,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
     // Creating Posts Table
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("DATCREATE", "onCreate: CREATING PIST DATATASBSBEB");
         String CREATE_POSTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
                 "\"post_id\" INTEGER NOT NULL UNIQUE," +
                 "\"post_title\" TEXT NOT NULL," +
@@ -46,6 +54,8 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
     // code to get all posts in a list view
     public List<Post> getAllPosts() {
+        Log.d("POSTGET", "getAllPosts: HII AM GETTIGN PSOT");
+
         List<Post> postList = new ArrayList<Post>();
         // Select All Query
         String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator)";
@@ -55,6 +65,7 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
+            Log.d("THERE IS DATA", "getAllPosts: THERE IS DATA");
             do {
                 Post post = new Post();
                 post.setPost_id(Integer.parseInt(cursor.getString(0)));
@@ -67,9 +78,29 @@ public class DatabasePosts extends SQLiteOpenHelper {
                 // Adding contact to list
                 postList.add(post);
             } while (cursor.moveToNext());
+        } else {
+            Log.d("NO DATA", "getAllPosts: NO DATA");
         }
 
         // return post list
         return postList;
+    }
+
+    public String createpost(String post_title, String post_content, String post_creator) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Title, post_title);
+        values.put(KEY_Content, post_content);
+        values.put(KEY_Likes, 0);
+        values.put(KEY_Dislikes, 0);
+        values.put(KEY_Creator, post_creator);
+
+        // Inserting Row
+        db.insert(DATABASE_TABLE, null, values);
+        //2nd argument is String containing nullColumnHack
+        db.close(); // Closing database connection
+
+        return "done";
     }
 }

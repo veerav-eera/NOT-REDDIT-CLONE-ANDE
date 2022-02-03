@@ -22,44 +22,45 @@ public class profile extends AppCompatActivity {
         setContentView(R.layout.account);
         SharedPreferences account = getApplicationContext().getSharedPreferences("Account_details", MODE_PRIVATE);
         String userid = account.getString("userid", "");
-        Log.d("userid", "onCreate: "+userid);
+        Log.d("userid", "onCreate: " + userid);
         DatabaseAccounts db = new DatabaseAccounts(this);
         Account userinfo = db.getaccount(userid);
-        Log.d("Userename", "onCreate: "+userinfo.getUsername());
-        Log.d("email", "onCreate: "+userinfo.getEmail());
+        Log.d("Userename", "onCreate: " + userinfo.getUsername());
+        Log.d("email", "onCreate: " + userinfo.getEmail());
         TextView email = (TextView) findViewById(R.id.emailtextview);
         email.setText(userinfo.getEmail());
         TextView username = (TextView) findViewById(R.id.nametextview);
         username.setText(userinfo.getUsername());
 
     }
-    public boolean onCreateOptionsMenu(Menu menu){
+
+    public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.about:
                 // Do Something
                 Intent i = new Intent(this, profile.class);
                 startActivity(i);
                 return true;
-            case R.id.help:
+            case R.id.createPost:
                 // Do Something
-                Toast.makeText(getApplicationContext(),"Help...", Toast.LENGTH_SHORT).show();
+                Intent j = new Intent(this, createpost.class);
+                startActivity(j);
                 return true;
             case R.id.pref:
-                // Do Something
-                // Do Something
-                i = new Intent(this, MainActivity.class);
-                startActivity(i);
+                Intent k = new Intent(this, MainActivity.class);
+                startActivity(k);
                 return true;
         }
         return false;
-
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.logoutbtn:

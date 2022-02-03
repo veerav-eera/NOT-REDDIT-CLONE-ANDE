@@ -26,5 +26,7 @@
             android:exported="true"></activity>
         <activity android:name=".register"
             android:exported="true"></activity>
+        <activity android:name=".createpost"
+            android:exported="true"></activity>
 </application>
 </manifest>

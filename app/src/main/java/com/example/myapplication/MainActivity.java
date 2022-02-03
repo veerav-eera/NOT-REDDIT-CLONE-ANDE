@@ -46,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(this, profile.class);
                 startActivity(i);
                 return true;
-            case R.id.help:
+            case R.id.createPost:
                 // Do Something
-                Toast.makeText(getApplicationContext(), "Help...", Toast.LENGTH_SHORT).show();
+                Intent j = new Intent(this, createpost.class);
+                startActivity(j);
                 return true;
             case R.id.pref:
-                // Do Something
-                Toast.makeText(getApplicationContext(), "Preference...", Toast.LENGTH_SHORT).show();
+                Intent k = new Intent(this, MainActivity.class);
+                startActivity(k);
                 return true;
         }
         return false;
