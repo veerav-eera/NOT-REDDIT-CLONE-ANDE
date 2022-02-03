@@ -27,11 +27,7 @@ public class login extends AppCompatActivity {
                 EditText name = (EditText) findViewById(R.id.username);
                 EditText password = (EditText) findViewById(R.id.userpassword);
                 String x = db.checkLogin(name.getText().toString(), password.getText().toString());
-                Log.d("Insert Data : ", "");
-                Log.d("Insert Data : ", "");
-                Log.d("Insert Data : ", "");
-                Log.d("Insert Data : ", "");
-                Log.d("Insert Data : ", "");
+
                 if (x != "failed") {
                     SharedPreferences account = getSharedPreferences("Account_details", MODE_PRIVATE);
                     SharedPreferences.Editor editor = account.edit();

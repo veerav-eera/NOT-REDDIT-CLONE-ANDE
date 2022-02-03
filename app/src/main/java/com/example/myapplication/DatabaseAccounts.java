@@ -24,6 +24,7 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
     public DatabaseAccounts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
+        this.getWritableDatabase();
     }
 
     // Creating Accounts Table
@@ -37,8 +38,29 @@ public class DatabaseAccounts extends SQLiteOpenHelper {
                 "\"email\" TEXT NOT NULL UNIQUE," +
                 "PRIMARY KEY(\"user_id\" AUTOINCREMENT)" +
                 ");";
-
         db.execSQL(CREATE_ACCOUNTS_TABLE);
+
+        String CREATE_POSTS_TABLE = "CREATE TABLE IF NOT EXISTS " + "post" + " (" +
+                "\"post_id\" INTEGER NOT NULL UNIQUE," +
+                "\"post_title\" TEXT NOT NULL," +
+                "\"post_content\" TEXT NOT NULL," +
+                "\"post_likes\" INTEGER NOT NULL DEFAULT 0," +
+                "\"post_dislikes\" INTEGER NOT NULL DEFAULT 0," +
+                "\"post_creator\" INTEGER NOT NULL," +
+                "PRIMARY KEY(\"post_id\" AUTOINCREMENT)" +
+                ");";
+        db.execSQL(CREATE_POSTS_TABLE);
+
+        String CREATE_IMPRESSIONS_TABLE = "CREATE TABLE IF NOT EXISTS " + "impressions" + " (" +
+                "\"impression_id\" INTEGER NOT NULL UNIQUE," +
+                "\"user_id\" INTEGER NOT NULL," +
+                "\"post_id\" INTEGER NOT NULL," +
+                "\"impression_status\" INTEGER DEFAULT NULL," +
+                "PRIMARY KEY(\"impression_id\" AUTOINCREMENT)," +
+                "FOREIGN KEY(\"post_id\") REFERENCES \"post\"(\"post_id\")," +
+                "FOREIGN KEY(\"user_id\") REFERENCES \"accounts\"(\"user_id\")" +
+                ");";
+        db.execSQL(CREATE_IMPRESSIONS_TABLE);
     }
 
     // Upgrading database
