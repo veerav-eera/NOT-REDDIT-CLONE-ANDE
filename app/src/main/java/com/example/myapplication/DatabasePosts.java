@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabasePosts extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "NOT-REDDIT-CLONE-ANDE";
     private static final String DATABASE_TABLE = "post";
     private  String KEY_Title = "post_title" ;
@@ -23,12 +23,12 @@ public class DatabasePosts extends SQLiteOpenHelper {
     public DatabasePosts(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
+        this.getWritableDatabase();
     }
 
     // Creating Posts Table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("DATCREATE", "onCreate: CREATING PIST DATATASBSBEB");
         String CREATE_POSTS_TABLE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
                 "\"post_id\" INTEGER NOT NULL UNIQUE," +
                 "\"post_title\" TEXT NOT NULL," +
@@ -54,8 +54,6 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
     // code to get all posts in a list view
     public List<Post> getAllPosts() {
-        Log.d("POSTGET", "getAllPosts: HII AM GETTIGN PSOT");
-
         List<Post> postList = new ArrayList<Post>();
         // Select All Query
         String selectQuery = "SELECT post.*, accounts.username FROM " + DATABASE_TABLE + " INNER JOIN accounts ON (accounts.user_id = post.post_creator) ORDER BY post_id DESC";
@@ -65,7 +63,6 @@ public class DatabasePosts extends SQLiteOpenHelper {
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
-            Log.d("THERE IS DATA", "getAllPosts: THERE IS DATA");
             do {
                 Post post = new Post();
                 post.setPost_id(Integer.parseInt(cursor.getString(0)));
